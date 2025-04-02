@@ -3,8 +3,9 @@ import './App.css'
 function App() {
   return (
     <>
-      <div className='flex justify-center items-center min-h-screen bg-gray-100'>
+      <div className='flex flex-col justify-center items-center min-h-screen bg-gray-100'>
         <p>this is a demo to test jenkins</p>
+        <p>do something in develop branch </p>
       </div>
     </>
   )
