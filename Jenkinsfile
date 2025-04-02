@@ -17,11 +17,12 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('Lint Code') {
-      steps {
-        sh 'npm run lint'
-      }
-    }
+   stage('Lint Code') {
+     steps {
+       sh 'npm run lint -- --fix' // 自动修复
+       sh 'git commit -am "Auto-fix lint errors" || true' // 提交修复（忽略无修改情况）
+     }
+   }
 
     stage('Build') {
       steps {
