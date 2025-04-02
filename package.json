@@ -10,7 +10,7 @@
     "lint:fix": "eslint src --fix",
     "format": "prettier --write src",
     "preview": "vite preview",
-    "deploy": "gh-pages -f -d dist"  
+    "deploy": "gh-pages -d dist -r https://${GITHUB_TOKEN}@github.com/PomiHD/jenkinsdemo.git"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.0",
