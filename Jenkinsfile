@@ -1,18 +1,19 @@
 pipeline {
   agent any
-  tools { nodejs "NodeJS-22" }
-
+  tools {
+    nodejs "NodeJS-22" // 确保与Global Tools配置名称完全一致
+  }
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'develop', url: 'https://github.com/PomiHD/jenkinsdemo.git'
+        git branch: 'develop', 
+        url: 'https://github.com/PomiHD/jenkinsdemo.git'
       }
     }
 
     stage('Install Dependencies') {
       steps {
-        sh 'npm ci'
-        sh 'mkdir -p $HOME/.npm && ln -s $HOME/.npm ./node_modules/.cache'
+        sh 'npm ci' // 更安全的依赖安装方式
       }
     }
 
@@ -31,26 +32,22 @@ pipeline {
 
     stage('Deploy to GitHub Pages') {
       environment {
-        DEPLOY_TOKEN = credentials('github-token')
+        // 必须使用usernamePassword类型凭据
+        GIT_CREDENTIALS = credentials('github-cred')
       }
       steps {
-        sh 'git config --global user.email "wsgddjy@live.com"'
-        sh 'git config --global user.name "PomiHD"'
+        // 统一认证配置
         sh '''
-          cd dist
-          git init
-          git add .
-          git commit -m "Auto-Deploy"
-          git -c http.sslVerify=true push --force "https://${DEPLOY_TOKEN}@github.com/PomiHD/jenkinsdemo.git" main:gh-pages
+          git config --global user.email "wsgddjy@live.com"
+          git config --global user.name "PomiHD"
+          
+          # 使用gh-pages插件部署（需在package.json配置）
+          npm run deploy
+          
+          # 清理残留分支
+          git push origin --delete gh-pages || true
         '''
       }
-    }
-  }
-
-  post {
-    always {
-      sh 'rm -rf $WORKSPACE/dist/.git'
-      sh 'find . -name "*.log" -type f -delete'
     }
   }
 }
