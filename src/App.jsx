@@ -1,6 +1,7 @@
 import './App.css'
 
 function App() {
+  const name = 'John';
   return (
     <>
       <div className='flex flex-col justify-center items-center min-h-screen bg-gray-100'>
@@ -8,9 +9,7 @@ function App() {
         <p>do something in develop branch </p>
         <p>I&#39;m a feature branch</p>
 
-        <p>a test! 
-        sad
-        </p>
+        <p>a test!</p>
       </div>
     </>
   )
