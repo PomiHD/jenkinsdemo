@@ -1,4 +1,4 @@
-﻿pipeline {
+pipeline {
   agent any
 
   tools {
@@ -17,7 +17,6 @@
         sh 'npm install'
       }
     }
-
     stage('Lint Code') {
       steps {
         sh 'npm run lint'
