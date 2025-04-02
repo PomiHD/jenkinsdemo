@@ -8,7 +8,7 @@ function App() {
         <p>this is a demo to test jenkins</p>
         <p>do something in develop branch </p>
         <p>I&#39;m a feature branch</p>
-
+<p>{name}</p>
         <p>a test!</p>
       </div>
     </>
