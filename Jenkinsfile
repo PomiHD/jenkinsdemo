@@ -35,8 +35,18 @@ pipeline {
       }
       steps {
         sh 'git config --global user.email "wsgddjy@live.com"'
-        sh 'git config --global user.name "Jenkins"'
+        sh 'git config --global user.name "PomiHD"'
         sh 'npm run deploy'
+        
+        // 强制使用HTTPS+Token认证推送
+            sh '''
+              npm run build
+              cd dist
+              git init
+              git add .
+              git commit -m "Auto-Deploy"
+              git push --force "https://${GITHUB_TOKEN}@github.com/PomiHD/jenkinsdemo.git" main:gh-pages
+            '''
       }
     }
   }
