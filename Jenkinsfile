@@ -45,13 +45,12 @@ pipeline {
                         sh '''
                           git config --global user.email "wsgddjy@live.com"
                           git config --global user.name "PomiHD"
-                          npx gh-pages --dist dist --repo "https://${GH_TOKEN}@github.com/PomiHD/jenkinsdemo.git" --clean
+                          npx gh-pages --dist dist --repo "https://${GH_TOKEN}@github.com/PomiHD/jenkinsdemo.git" -c
                         '''
                     }
                 }
             }
         }
-    }
     post {
         failure {
             emailext body: "构建失败：${env.JOB_NAME} - ${env.BUILD_NUMBER}\n详情：${env.BUILD_URL}",
