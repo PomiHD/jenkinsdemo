@@ -27,6 +27,7 @@ pipeline {
                   git add . || true
                   if ! git diff --cached --exit-code; then
                     git commit -m "Jenkins: Auto-fix lint errors"
+                    git push origin develop
                   fi
                 '''
             }
