@@ -21,7 +21,8 @@ pipeline {
 
         stage('Lint & Auto Fix') {
             steps {
-                sh 'npm run lint -- --fix'
+                sh 'npm run lint:fix'
+                sh 'npm run format'
                 sh '''
                   git add . || true
                   if ! git diff --cached --exit-code; then
