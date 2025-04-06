@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/jenkinsdemo/', // 新增此行（必须与GitHub仓库名一致）
   plugins: [
     react(),
     tailwindcss(),
