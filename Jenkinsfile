@@ -51,6 +51,7 @@ pipeline {
                 }
             }
         }
+    }
     post {
         failure {
             emailext body: "构建失败：${env.JOB_NAME} - ${env.BUILD_NUMBER}\n详情：${env.BUILD_URL}",
