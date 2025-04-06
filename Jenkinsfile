@@ -41,12 +41,18 @@ pipeline {
         stage('Deploy to GitHub Pages') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'github-token', variable: 'GH_TOKEN')]) {
-                        sh '''
-                          git config --global user.email "wsgddjy@live.com"
-                          git config --global user.name "PomiHD"
-                          npx gh-pages --dist dist --repo "https://${GH_TOKEN}@github.com/PomiHD/jenkinsdemo.git" -c
-                        '''
+                  // 统一认证配置
+                withCredentials([string(credentialsId: 'github-token', variable: 'GH_TOKEN')]) {
+                    sh '''
+                    git config --global user.email "wsgddjy@live.com"
+                    git config --global user.name "PomiHD"
+                    
+                    # 清理旧分支
+                    git push origin --delete gh-pages || true
+                    
+                    # 使用安全方式部署
+                    npx gh-pages --dist dist --repo "https://${GH_TOKEN}@github.com/PomiHD/jenkinsdemo.git"
+                    '''
                     }
                 }
             }
