@@ -51,9 +51,6 @@ pipeline {
                           git config --global user.email "wsgddjy@live.com"
                           git config --global user.name "PomiHD"
                           
-                          # 清理旧分支
-                          git push origin --delete gh-pages || true
-                          
                           # 使用安全方式部署
                           npx gh-pages --dist dist --repo "https://${GH_TOKEN}@github.com/PomiHD/jenkinsdemo.git"
                           '''
